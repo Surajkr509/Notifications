@@ -1,0 +1,33 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.notification {
+  color: #933434;
+  text-decoration: none;
+  padding: 10px 8px;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.notification:hover {
+  background: silver;
+}
+
+.notification .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+}
+.fa {
+    font: normal normal normal 30px/1 FontAwesome !important;
+}
+.modal-dialog {
+    width: 300px !important;
+    margin: 40px 250px !important;
+}
