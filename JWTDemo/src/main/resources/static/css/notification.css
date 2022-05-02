@@ -31,3 +31,54 @@ body {
     width: 300px !important;
     margin: 40px 250px !important;
 }
+.modal-header {
+    background-color: antiquewhite;
+        font-family: system-ui;
+}
+  .dropdown {
+  float: left;
+  overflow: hidden;
+}
+.dropdown .dropbtn {
+  cursor: pointer;
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+  .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 130px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  margin-top:56px;
+  margin-left:110px;
+}
+
+.dropdown-content a {
+  float: none !important;
+  color: black;
+  padding: 12px ;
+  text-decoration: none;
+  display: block;
+  text-align: left !important;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+.modal-dialog2 {
+    width: 600px !important;
+    margin: 150px 360px !important;
+}
+.modal-dialog3 {
+    width: 500px !important;
+    margin: 200px 400px !important;
+}

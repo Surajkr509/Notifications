@@ -1,5 +1,7 @@
 package com.example.jwtdemo.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.jwtdemo.bean.ResultDTO;
+import com.example.jwtdemo.model.Notifications;
 import com.example.jwtdemo.service.NotificationsService;
 import com.example.jwtdemo.service.PlayersService;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping
 public class NotificationsController {
 	
 	@Autowired
@@ -47,8 +50,8 @@ public class NotificationsController {
 	
 	@GetMapping(value = "/getAllUnReadNotifications")
 	@ResponseBody
-	public Object getAllUnReadNotifications(HttpServletRequest http) {
-		return notificationsService.getAllUnReadNotifications(http);
+	public Object getAllUnReadNotifications() {
+		return notificationsService.getAllUnReadNotifications();
 	}
 
 	@GetMapping(value = "/getAllNotifications")
@@ -60,5 +63,13 @@ public class NotificationsController {
 	@ResponseBody
 	public Object getAllReadNotification(HttpServletRequest http) {
 		return notificationsService.getAllReadNotifications(http);
+	}
+	@GetMapping("/home")
+	public String getAllNotifications(Model model) {
+		 Long count=notificationsService.countAllUnReadNotifications();
+		 Object notifications=notificationsService.getAllUnReadNotifications();
+		 model.addAttribute("count",count);
+		 model.addAttribute("noticelist", notifications);
+		 return "index";
 	}
 }

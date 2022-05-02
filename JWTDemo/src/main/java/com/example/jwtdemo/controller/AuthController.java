@@ -50,8 +50,8 @@ public class AuthController {
 	@Autowired
 	NotificationsService notificationsService;
 
-	@PostMapping
-	public Object signUp(@ModelAttribute Players players) {
+	@PostMapping("/addPlayer")
+	public Object signUp(@Valid Players players) {
 		System.err.println("SignUp::Controller");
 		ResultDTO<?> responsePacket=null;
 		try {
@@ -155,10 +155,13 @@ public class AuthController {
 		}
 	}
 	
-	@GetMapping("/home")
-	public String getAllUnReadNotificationsCount(Model model) {
-		 Long count=notificationsService.countAllUnReadNotifications();
-		 model.addAttribute("count",count);
-		 return "index";
+	@GetMapping("/signUp")
+	public String signIn(Players players) {
+		return"signUp";
+	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return"login";
 	}
 }

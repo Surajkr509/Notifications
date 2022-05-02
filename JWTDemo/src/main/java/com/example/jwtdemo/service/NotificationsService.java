@@ -28,7 +28,7 @@ public class NotificationsService {
 		} return null;
 	}
 	
-	public Object getAllUnReadNotifications(HttpServletRequest http) {
+	public Object getAllUnReadNotifications() {
 		List<Notifications> notifications=notificationsRepository.findAllByReadStatus(0);
 		List<Object> listdata=new ArrayList<>();
 		for(Notifications notification:notifications) {
