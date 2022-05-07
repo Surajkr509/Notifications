@@ -19,6 +19,8 @@ public class Role implements Serializable {
 	private Long id;
 	
 	private String role;
+	
+	private boolean active;
 
 	public Long getId() {
 		return id;
@@ -34,6 +36,14 @@ public class Role implements Serializable {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 	
 	

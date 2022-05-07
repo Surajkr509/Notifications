@@ -104,21 +104,22 @@ public class PlayersService {
 		playersRepository.save(user);
 	}
 
-	public Object getAllNotifications(Authentication auth) {
-		System.err.println("Player"+auth);
-
-		Long playerId=playersRepository.findIdByEmail(auth.getName());
-		List<Notifications> notifications=notificationsRepository.findAllByPlayerId(playerId);
-		List<Object> dataList=new ArrayList<>();
-		if(!notifications.isEmpty()) {
-			for(Notifications notification:notifications) {
-				HashMap<String, Object> userData=new HashMap<>();
-				userData.put("playerId", notification.getId());
-				userData.put("message",notification.getMessage());
-				dataList.add(userData);
-			}
-		}
-			return dataList;
-		
+	/*
+	 * public Object getAllNotifications(Authentication auth) {
+	 * System.err.println("Player"+auth);
+	 * 
+	 * Long playerId=playersRepository.findIdByEmail(auth.getName());
+	 * List<Notifications>
+	 * notifications=notificationsRepository.findAllByPlayerId(playerId);
+	 * List<Object> dataList=new ArrayList<>(); if(!notifications.isEmpty()) {
+	 * for(Notifications notification:notifications) { HashMap<String, Object>
+	 * userData=new HashMap<>(); userData.put("playerId", notification.getId());
+	 * userData.put("message",notification.getMessage()); dataList.add(userData); }
+	 * } return dataList;
+	 * 
+	 * }
+	 */
+	public List<Players> getAllPlayers(){
+		return playersRepository.findAll();
 	}
 }

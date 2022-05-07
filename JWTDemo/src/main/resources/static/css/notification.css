@@ -34,10 +34,12 @@ body {
 .modal-header {
     background-color: antiquewhite;
         font-family: system-ui;
+            padding: 9px !important;
 }
   .dropdown {
   float: left;
-  overflow: hidden;
+
+  
 }
 .dropdown .dropbtn {
   cursor: pointer;
@@ -57,7 +59,7 @@ body {
   background-color: #f9f9f9;
   min-width: 130px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  z-index: 4;
   margin-top:56px;
   margin-left:110px;
 }
@@ -69,16 +71,56 @@ body {
   text-decoration: none;
   display: block;
   text-align: left !important;
+    z-index: 10;
 }
 
 .dropdown-content a:hover {
   background-color: #ddd;
 }
-.modal-dialog2 {
+.dialog2 {
     width: 600px !important;
     margin: 150px 360px !important;
+    
 }
-.modal-dialog3 {
+.dialog3 {
     width: 500px !important;
     margin: 200px 400px !important;
+}
+.active {
+  background-color: dodgerblue;
+  color: white;
+}
+/*  .ul{
+ margin-top:-280px;
+ font-size:xx-large;
+ }
+  .li{
+ color:black !important;
+ 
+
+ }
+ .ul a:hover{
+  background-color: white;
+} */
+
+.modalhead {
+	margin-right: 160;
+    font-weight: 500;
+    font-size: initial;
+}
+.modalhead2 {
+	margin-right: -41;
+    font-weight: 500;
+    font-size: initial;
+}
+.modal-header .close {
+    margin-right: -290 !important;
+        margin-top: -11px !important;
+}
+.modal-header .close2 {
+    margin-right: -900 !important;
+    font-size:large
+}
+.validation-message{
+	color:red;
 }

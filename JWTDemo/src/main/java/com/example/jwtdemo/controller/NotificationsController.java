@@ -16,15 +16,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.jwtdemo.bean.ResultDTO;
 import com.example.jwtdemo.model.Notifications;
+import com.example.jwtdemo.model.Players;
 import com.example.jwtdemo.service.NotificationsService;
 import com.example.jwtdemo.service.PlayersService;
 
 @Controller
-@RequestMapping
+@RequestMapping()
 public class NotificationsController {
 	
 	@Autowired
 	NotificationsService notificationsService;
+	@Autowired
+	private PlayersService playersService;
 	
 //	@GetMapping("/getAllNotifications")
 //	public ResponseEntity<?> getAllNotifications(Authentication auth){
@@ -45,7 +48,7 @@ public class NotificationsController {
 	public Long getAllUnReadNotificationsCount(Model model) {
 	 Long count=notificationsService.countAllUnReadNotifications();
 	 model.addAttribute("count",count);
-	 return null;
+	 return count;
 	}
 	
 	@GetMapping(value = "/getAllUnReadNotifications")
@@ -68,8 +71,10 @@ public class NotificationsController {
 	public String getAllNotifications(Model model) {
 		 Long count=notificationsService.countAllUnReadNotifications();
 		 Object notifications=notificationsService.getAllUnReadNotifications();
+		 List<Players> playerdata=playersService.getAllPlayers();
 		 model.addAttribute("count",count);
 		 model.addAttribute("noticelist", notifications);
+		 model.addAttribute("playerslist", playerdata);
 		 return "index";
 	}
 }

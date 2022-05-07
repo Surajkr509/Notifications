@@ -1,0 +1,73 @@
+<!-- Footer -->
+<footer >
+	<div class="container">
+	<div class=col-sm-3></div>
+  <!-- Copyright -->
+  <div class="col-sm-9 text-center">© 2020 Copyright:
+    <a href="/"> SJ.com</a>
+  </div>
+  <!-- Copyright -->
+	</div>
+	
+</footer>
+<!-- Footer -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>	
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js" defer></script>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		getNotificationsCount();
+		getAllUnReadNotifications();
+	});
+
+	function getNotificationsCount() {
+		var url = "/game/getAllUnReadNotificationsCount";
+		$.ajax ({
+			url : url,
+			type : 'GET',
+			success : function(response) {
+				if (response) {
+					console.log(response);
+					$("#totalNotif").text(response);
+				
+				}
+			},
+			error : function(response) {
+				swal("", response.responseJSON.message, "warning");
+			}
+		});
+	}
+	function getAllUnReadNotifications(){
+		var url = "/game/getAllUnReadNotifications";
+		$.ajax ({
+			url : url,
+			type : 'GET',
+			success : function(response) {
+				notification='';
+				for (var i = 0; i < response.length; i++) {
+					notification += '<div class="row">';
+					notification += '<a class="dropdown-item d-flex align-items-center">';
+					notification += '<div class="col-sm-2">';
+					notification += '<div class="icon-circle bg-primary" style="margin-top:10;"><i class="fas fa-file-alt text-white"></i></div></div>';
+					notification += '<div class="col-sm-10 small text-black-500"><span>'+response[i]['createdAt'] +' </span><br><span style="color: #d94700;font-weight: 900;">'+response[i]['message'] +'</span></div></div><div>';
+				} 
+				$("#message").html(notification);
+				$("#username").text(response[0].username);
+			},
+			error : function(response) {
+				swal("", response.responseJSON.message, "warning");
+			}
+			
+		})
+	}
+	</script>
