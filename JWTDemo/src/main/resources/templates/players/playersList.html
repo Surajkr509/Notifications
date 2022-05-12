@@ -1,0 +1,82 @@
+<div th:include="/layout/header"></div>
+
+<div class="container-fluid">
+	<section class="content-header">
+		<div class="container-fluid" style="margin-top: 120;">
+			<div class="row mb-2">
+				<div class="col-sm-11"></div>
+				<div class="col-sm-1">
+					<ol class="float-sm-right">
+						<li class=" active">
+							<button onclick="location.href='/game/admin/addRole'"
+								class="btn btn-primary">Add Player</button>
+						</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="container">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-9">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h4 class="">Players</h4>
+				</div>
+				<div class="card-body">
+
+					<table id="example"
+						class="table table-striped table-bordered dt-responsive nowrap"
+						style="width: 100%; text-align:center;">
+
+						<thead>
+							<tr>
+								<th>Sl No.</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th width="10%">Mobile No.</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="player,indx : ${playerslist}">
+								<td th:text="${indx.count}"></td>
+								<td th:text="${player.name}"></td>
+								<td th:text="${player.email}"></td>
+								<td th:text="${player.mobNo}"></td>
+								
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:include="/layout/footer"></div>
+
+
+<script type="text/javascript">
+	function changeStatus(countr, vendId, elem) {
+		var dataId = $(elem).data("id");
+		var url = "/game/admin/updateRoleStatus/" + dataId;
+		$.ajax({
+			url : url,
+			type : 'GET',
+			success : function(response) {
+				swal("", response, "success");
+			},
+			error : function(response) {
+				console.log(response);
+				swal("", "Cant update Status", "success");
+			}
+		});
+		$('#active' + countr).text($(elem).text());
+		if ($(elem).text() == 'Deactive')
+			$(elem).text('Active');
+		else
+			$(elem).text('Deactive');
+	}
+	$(document).ready(function() {
+		$('#example').DataTable();
+	});
+</script>

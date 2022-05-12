@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.jwtdemo.model.Players;
 import com.example.jwtdemo.model.Role;
 import com.example.jwtdemo.repository.RoleRepository;
+import com.example.jwtdemo.service.PlayersService;
 import com.example.jwtdemo.service.RolesResponsibilitiesService;
 
 @Controller
@@ -96,7 +98,7 @@ public class AdminController {
 		Role roleId=rolesResponsibilitiesService.getRoleById(id);
 		if (roleId!=null) {
 			modelAndView.addObject("role",roleId);
-			modelAndView.setViewName("roles/rolelist");
+			modelAndView.setViewName("roles/updateRole");
 			return modelAndView;
 		} else {
 			modelAndView.setViewName("admin/403");
@@ -118,4 +120,16 @@ public class AdminController {
 	}
 		return "Role Status Updated";
 	}
+	
+	@PostMapping("/updateRole")
+	public String updateRole(Role role) {
+		System.out.println(":::::AdminController.updateRole");
+		if(role!=null) {
+			rolesResponsibilitiesService.updateRole(role);
+			return "redirect:/admin/viewRoles";
+	}else {
+		return "admin/403";
+	}
+	}
+	
 }

@@ -23,4 +23,12 @@ public class RolesResponsibilitiesService {
 		return role;
 	}
 
+	 public void updateRole(Role role) {
+		 Optional<Role> roleData=roleRepository.findById(role.getId());
+		 if(roleData.isPresent()) {
+			 Role updateRole=roleData.get();
+			 updateRole.setRole(role.getRole());
+			 roleRepository.save(updateRole);
+		 }
+	 }
 }

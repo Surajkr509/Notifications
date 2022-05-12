@@ -60,13 +60,13 @@
 								</li>
 							<li><a th:href="@{admin/viewRoles}"> <i class="fas fa-table"></i>Role Management
 							</a></li>
-							<li><a href="table.html"> <i class="fas fa-group"></i>Player Management
+							<li><a th:href="@{admin/viewPlayers}"> <i class="fas fa-group"></i>Player Management
 							</a></li>
 							<li><a href="form.html"> <i class="fab fa-xbox"></i>Game Management
 							</a></li>
 							<li><a href="#"> <i class="fas fa-calendar-alt"></i>Calendar
 							</a></li>
-							<li><a href="map.html"> <i class="fas fa-map-marker-alt"></i>Maps
+							<li><a th:href="@{admin/map}"> <i class="fas fa-map-marker-alt"></i>Maps
 							</a></li>
 							<li class="has-sub"><a class="js-arrow" href="#"> <i
 									class="fas fa-copy"></i>Pages
@@ -88,9 +88,9 @@
 							<div class="col-md-12">
 								<div class="overview-wrap">
 									<h2 class="title-1">overview</h2>
-									<button class="au-btn au-btn-icon au-btn--blue">
-										<i class="zmdi zmdi-plus"></i>add item
-									</button>
+									<a th:href="@{/admin/report}" class="btn btn-info">
+										Generate Report
+									</a>
 								</div>
 							</div>
 						</div>

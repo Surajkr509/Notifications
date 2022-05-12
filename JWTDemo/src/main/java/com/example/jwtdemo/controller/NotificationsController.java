@@ -11,21 +11,26 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.jwtdemo.bean.ResultDTO;
 import com.example.jwtdemo.model.Notifications;
 import com.example.jwtdemo.model.Players;
+import com.example.jwtdemo.repository.NotificationsRepository;
 import com.example.jwtdemo.service.NotificationsService;
 import com.example.jwtdemo.service.PlayersService;
 
 @Controller
-@RequestMapping()
+@RequestMapping
 public class NotificationsController {
 	
 	@Autowired
 	NotificationsService notificationsService;
+	@Autowired
+	NotificationsRepository notificationsRepository;
 	@Autowired
 	private PlayersService playersService;
 	
@@ -76,5 +81,21 @@ public class NotificationsController {
 		 model.addAttribute("noticelist", notifications);
 		 model.addAttribute("playerslist", playerdata);
 		 return "index";
+	}
+	@GetMapping("/getUnReadNotificationById/{id}")
+	public ModelAndView getUnReadNotificationById(@PathVariable Long id) {
+		System.err.println("NotificationController.UnReadNotiByID:::");
+		ModelAndView modelAndView=new ModelAndView();
+		if(id!=null) {
+		Notifications notifyData=notificationsRepository.findById(id).get();
+		modelAndView.addObject("notifyDetails", notifyData);
+		modelAndView.setViewName("/notifications/UnReadnotificationById");
+		notifyData.setReadStatus(1);
+		notificationsRepository.save(notifyData);
+		return modelAndView;
+	} else {
+		modelAndView.setViewName("Error");
+		return modelAndView;
+	}
 	}
 }

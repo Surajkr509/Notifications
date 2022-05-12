@@ -1,0 +1,51 @@
+<div th:include="/layout/header"></div>
+
+	
+		<div class="containeradd" style="margin-left: 400px;margin-top: 200;">
+			<div class="row">
+				
+				<div class="col-sm-11">
+					<div class="card card-primary">
+						<div class="card-header">
+						<h3 class="card-title">Edit Role</h3>
+				</div>
+				<form role="form" id="quickForm" th:action="@{/admin/updateRole}"
+					method="POST">
+					<div class="card-body">
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label for="exampleInputEmail1">Role</label>
+							</div>
+							<div class="col-sm-6">
+								<input type="hidden" name="id" th:value="${role.id}" readonly />
+								<input type="text" name="role" class="form-control"
+									id="type" th:value="${role.role}"> <span
+									class="validation-message" id="message"></span>
+							</div>
+						</div>
+						<div class="form-group mb-0"></div>
+					</div>
+					<div class="card-footer">
+						<button type="button" id="change" onclick="confirm_update()"
+							class="btn btn-primary">Update Role</button>
+					</div>
+				</form>
+					</div>
+				</div>
+				<div class="col-md-6"></div>
+			</div>
+		</div>
+	</section>
+</div>
+<div th:include="/layout/footer"></div>
+<script type="text/javascript">
+	function confirm_update() {
+		var data = $('#type').val();
+		if (data == "") {
+			$('#message').text("please enter Role");
+		} else {
+			$('#change').attr('disabled', 'disabled');
+			$('#quickForm').submit();
+		}
+	}
+</script>

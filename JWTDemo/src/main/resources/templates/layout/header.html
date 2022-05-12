@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<link th:href="@{/css/sweet-alert.css}" rel="stylesheet">  
 <style>
  .dataTables_filter {
    float:right;
@@ -64,15 +65,15 @@
 									class="fas fa-tachometer-alt"></i>Dashboard
 							</a>
 								</li>
-							<li><a href="#"> <i class="fas fa-table"></i>Role Management
+							<li><a th:href="@{./viewRoles}"> <i class="fas fa-table"></i>Role Management
 							</a></li>
-							<li><a href="table.html"> <i class="fas fa-group"></i>Player Management
+							<li><a th:href="@{./viewPlayers}"> <i class="fas fa-group"></i>Player Management
 							</a></li>
 							<li><a href="form.html"> <i class="fab fa-xbox"></i>Game Management
 							</a></li>
 							<li><a href="#"> <i class="fas fa-calendar-alt"></i>Calendar
 							</a></li>
-							<li><a href="map.html"> <i class="fas fa-map-marker-alt"></i>Maps
+							<li><a th:href="@{./map}"> <i class="fas fa-map-marker-alt"></i>Maps
 							</a></li>
 							<li class="has-sub"><a class="js-arrow" href="#"> <i
 									class="fas fa-copy"></i>Pages
@@ -104,7 +105,7 @@
 					<p class="modalhead">NOTIFICATIONS</p>
 				</div>
 				<div class="modal-body">
-				<a th:href="@{/getAllNotifications}" style="width:100%;">
+				
 					<!-- <table class="table table-condensed">
 						<tbody>
 							<tr>
@@ -123,7 +124,7 @@
 						</tbody>
 
 					</table> -->
-					<div id="message"></div></a>
+					<div id="message"></div>
 					<a style="padding: 15px 66px;" th:href="@{/getAllNotifications}">Show
 						All Notifications</a>
 				</div>
