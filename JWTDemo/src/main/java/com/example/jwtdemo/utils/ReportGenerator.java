@@ -55,4 +55,31 @@ public class ReportGenerator {
 
 	}
 
+	public ByteArrayInputStream generateReport() throws IOException {
+		String [] dashboardColumns= { "Total Players","Total Games","Total Matches","Total Earning" };
+		try (Workbook workbook=new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();){
+			Sheet dashboardSheet = workbook.createSheet("DashboardReport");
+			Font headerFont=workbook.createFont();
+			headerFont.setBold(true);
+			headerFont.setColor(IndexedColors.AQUA.getIndex());
+			CellStyle headerCellStyle=workbook.createCellStyle();
+			headerCellStyle.setFont(headerFont);
+			Row headerRow=dashboardSheet.createRow(0);
+			for(int col=0;col<dashboardColumns.length;col++) {
+				Cell cell= headerRow.createCell(col);
+				cell.setCellValue(dashboardColumns[col]);
+				cell.setCellStyle(headerCellStyle);
+			}
+			Row row = dashboardSheet.createRow(1);
+			row.createCell(0).setCellValue(900);
+			row.createCell(1).setCellValue(333);
+			row.createCell(2).setCellValue(555);
+			row.createCell(3).setCellValue(666);
+			
+			workbook.write(out);
+			return new ByteArrayInputStream(out.toByteArray());
+			
+			
+		}
+	}
 }

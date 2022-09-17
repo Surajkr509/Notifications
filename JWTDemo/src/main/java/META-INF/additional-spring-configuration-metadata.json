@@ -1,5 +1,12 @@
-{"properties": [{
-  "name": "example.jwtdemo.jwtSecret",
-  "type": "java.lang.String",
-  "description": "A description for 'example.jwtdemo.jwtSecret'"
-}]}
+{"properties": [
+  {
+    "name": "example.jwtdemo.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'example.jwtdemo.jwtSecret'"
+  },
+  {
+    "name": "security.basic.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'security.basic.enabled'"
+  }
+]}

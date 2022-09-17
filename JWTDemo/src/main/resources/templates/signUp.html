@@ -1,6 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link th:href="@{/css/signUp.css}" rel="stylesheet">
 <head>
+<style>
+span.validation-message {
+   color:red;
+}
+</style>
 <title>Registration</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -19,23 +24,29 @@
 		<h1>SignUp Form</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<form action="addPlayer" method="POST" th:object="${players}">
+				<form action="addPlayer" id="quickForm" method="POST" th:object="${players}">
 					<input type="text" name="name"
 							class="form-control" id="name" placeholder="Enter Name">
 							<span th:if="${#fields.hasErrors('name')}" th:errorclass="error"
-							th:errors="*{name}"></span>
-					<input class="text email" type="email" name="email" placeholder="Email">
-					<input class="text" type="text" name="mobNo" placeholder="Mobile Number">
+							th:errors="*{name}"></span><span th:text="${nameError}" class="validation-message" id="nameSpan"></span><br><br>
+					<input type="text" name="email"
+							class="form-control" id="email" placeholder="Enter Email">
+							<span th:if="${#fields.hasErrors('email')}" th:errorclass="error"
+							th:errors="*{email}"></span><span class="validation-message" id="emailSpan"></span><span th:text="${response}" style="color:red;"></span><br><br>
+					<input type="text" name="mobNo"
+							class="form-control" id="mobNo" placeholder="Mobile Number">
+							<span th:if="${#fields.hasErrors('mobNo')}" th:errorclass="error"
+							th:errors="*{mobNo}"></span><span class="validation-message" id="mobNoSpan"></span><br><br>
 					<div class="wthree-text">
 						<label class="anim">
-							<input type="checkbox" class="checkbox" >
+							<input type="checkbox" id="myCheck" class="checkbox" name="test" required>
 							<span>I Agree To The Terms & Conditions</span>
 						</label>
 						<div class="clear"> </div>
 					</div>
-					<input type="submit" value="SIGNUP">
+					<input type="submit" onclick="confirm_update()" id="change" value="SIGNUP">
 				</form>
-				<p>Don't have an Account? <a href="#"> Login Now!</a></p>
+				<p>Don't have an Account? <a th:href="@{./login}"> Login Now!</a></p>
 			</div>
 		</div>
 		<!-- copyright -->
@@ -57,5 +68,27 @@
 		</ul>
 	</div>
 	<!-- //main -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+	function confirm_update() {
+		var name = document.getElementsByName('name')[0].value;
+		var mobNo = document.getElementsByName('mobNo')[0].value;
+		var email = document.getElementsByName('email')[0].value;
+		if (name != "" & mobNo != "" & email != "") {
+			$('#change').attr('disabled', 'disabled');
+			$('#quickForm').submit();
+		} else {
+			if (name == "")
+				$('#nameSpan').text("*Please enter name");
+
+			if (email == "")
+				$('#emailSpan').text("*Please enter email");
+
+			if (mobNo == "")
+				$('#mobNoSpan').text("*Please enter mobile number");	
+		}
+	}
+</script>
 </body>
 </html>

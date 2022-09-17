@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.jwtdemo.bean.ChangePassword;
 import com.example.jwtdemo.bean.ResultDTO;
@@ -51,26 +52,35 @@ public class AuthController {
 	NotificationsService notificationsService;
 
 	@PostMapping("/addPlayer")
-	public Object signUp(@Valid Players players) {
+	public ModelAndView signUp(@Valid Players players) {
 		System.err.println("SignUp::Controller");
+		ModelAndView model=new ModelAndView();
 		ResultDTO<?> responsePacket=null;
 		try {
 			ArrayList<String> errorList=bean.signUpValidation(players);
 			if(errorList.size()!=0) {
 			ResultDTO<ArrayList<String>> errorPacket=new ResultDTO<>(false,errorList,Constants.invalidData);
-			return new ResponseEntity<>(errorPacket,HttpStatus.BAD_REQUEST);
+			model.addObject("errors",errorPacket);
+			model.setViewName("/signUp");
+			return model;
 		}
 			if(playersRepository.existsByEmail(players.getEmail()) || playersRepository.existsByMobNo(players.getMobNo())) {
-				responsePacket=new ResultDTO<>(false,null,"Player Already Exists by email or mobile no.");
-						return new ResponseEntity<>(responsePacket,HttpStatus.BAD_REQUEST);
+				String msg ="Player Already Exists by email or mobile no.";
+				model.addObject("response",msg);
+				model.setViewName("/signUp");
+				return model;
 			} else {
 				responsePacket=new ResultDTO<>(true,playersService.signUp(players),Constants.requestSuccess);
-				return new ResponseEntity<>(responsePacket,HttpStatus.OK);
+				model.addObject(responsePacket);
+				model.setViewName("/login");
+				return model;
 			}
 			}catch (Exception e) {
 				e.printStackTrace();
 				responsePacket=new ResultDTO<>(false,null,e.getMessage());
-				return new ResponseEntity<>(responsePacket,HttpStatus.BAD_REQUEST);
+				model.addObject(responsePacket);
+				model.setViewName("/signUp");
+				return model;
 			}
 	}
 	
